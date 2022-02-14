@@ -1,7 +1,7 @@
-import AWS, { SSM } from 'aws-sdk';
+import { SSM } from 'aws-sdk';
 // AWS.config.update({ region: "us-west-1" });
 
-const ssm: AWS.SSM = new AWS.SSM();
+const ssm: SSM = new SSM();
 
 async function getSSMParameters(parameters: string[]): Promise<string[]> {
     return ssm

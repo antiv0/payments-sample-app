@@ -2049,6 +2049,11 @@
   dependencies:
     "anymatch" "*"
 
+"@types/applepayjs@^3.0.3":
+  "integrity" "sha512-8hHE87c/JN/BebRDYzkOWIuTkuB1JHaQUEaQd1atNn/9FQb6s9iEpptAcugxbvQL1ykE0czQgEkUAyVVtR8Jzw=="
+  "resolved" "https://registry.npmjs.org/@types/applepayjs/-/applepayjs-3.0.3.tgz"
+  "version" "3.0.3"
+
 "@types/autoprefixer@9.7.2":
   "integrity" "sha512-QX7U7YW3zX3ex6MECtWO9folTGsXeP4b8bSjTq3I1ODM+H+sFHwGKuof+T+qBcDClGlCGtDb3SVfiTVfmcxw4g=="
   "resolved" "https://registry.npmjs.org/@types/autoprefixer/-/autoprefixer-9.7.2.tgz"
@@ -2995,6 +3000,11 @@
   dependencies:
     "type-fest" "^0.11.0"
 
+"ansi-font@0.0.2":
+  "integrity" "sha1-iQMBvVhBRi/TnAt3Ca/R9SUUMzE="
+  "resolved" "https://registry.npmjs.org/ansi-font/-/ansi-font-0.0.2.tgz"
+  "version" "0.0.2"
+
 "ansi-html@0.0.7":
   "integrity" "sha1-gTWEAhliqenm/QOflA0S9WynhZ4="
   "resolved" "https://registry.npmjs.org/ansi-html/-/ansi-html-0.0.7.tgz"
@@ -3221,7 +3231,7 @@
     "postcss" "^7.0.30"
     "postcss-value-parser" "^4.1.0"
 
-"aws-sdk@^2.1072.0":
+"aws-sdk@2.1072.0":
   "integrity" "sha512-b0gEHuC6xTGduPTS+ZCScurw9RTyOned9gf6H0rDagW8hdSMebsFQy84ZreeiZHHChyKyWrNUbUFugOYdw+WXw=="
   "resolved" "https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.1072.0.tgz"
   "version" "2.1072.0"
@@ -4187,6 +4197,14 @@
   "resolved" "https://registry.npmjs.org/commondir/-/commondir-1.0.1.tgz"
   "version" "1.0.1"
 
+"commonjs@^0.0.1":
+  "integrity" "sha1-ZcUx3P9lZcp8ld38lmIricwClNU="
+  "resolved" "https://registry.npmjs.org/commonjs/-/commonjs-0.0.1.tgz"
+  "version" "0.0.1"
+  dependencies:
+    "system" ">=0.0.1"
+    "test" ">=0.0.5"
+
 "component-emitter@^1.2.1":
   "integrity" "sha512-Rd3se6QB+sO1TwqZjscQrurpEPIfO0/yYnSin6Q/rD3mOutHvUrCAhJub3r90uNb+SESBuE0QYoB90YdfatsRg=="
   "resolved" "https://registry.npmjs.org/component-emitter/-/component-emitter-1.3.0.tgz"
@@ -4976,6 +4994,11 @@
     "domelementtype" "^2.0.1"
     "entities" "^2.0.0"
 
+"dom@^0.0.3":
+  "integrity" "sha1-FuDCJaBVPY5DYsxLzXjY/eWa9ns="
+  "resolved" "https://registry.npmjs.org/dom/-/dom-0.0.3.tgz"
+  "version" "0.0.3"
+
 "domain-browser@^1.1.1":
   "integrity" "sha512-jnjyiM6eRyZl2H+W8Q/zLMA481hzi0eszAaBUzIVnmYVDBbnLxVNnfu1HgEBvCbL+71FrxMl3E6lpKH7Ge3OXA=="
   "resolved" "https://registry.npmjs.org/domain-browser/-/domain-browser-1.2.0.tgz"
@@ -5277,6 +5300,11 @@
     "is-callable" "^1.1.4"
     "is-date-object" "^1.0.1"
     "is-symbol" "^1.0.2"
+
+"es6@^0.0.7":
+  "integrity" "sha1-OyhRr+6mDbFs9WnVYGbaoPOXRnY="
+  "resolved" "https://registry.npmjs.org/es6/-/es6-0.0.7.tgz"
+  "version" "0.0.7"
 
 "esbuild-darwin-64@0.14.2":
   "integrity" "sha512-Uq8t0cbJQkxkQdbUfOl2wZqZ/AtLZjvJulR1HHnc96UgyzG9YlCLSDMiqjM+NANEy7/zzvwKJsy3iNC9wwqLJA=="
@@ -11423,6 +11451,11 @@
   "resolved" "https://registry.npmjs.org/symbol-tree/-/symbol-tree-3.2.4.tgz"
   "version" "3.2.4"
 
+"system@>=0.0.1":
+  "integrity" "sha512-BwSUSa8LMHZouGadZ34ck3TsrH5s3oMmTKPK+xHdbBnTCZOZMJ38fHGKLAHkBl0PXru1Z4BsymQU4qqvTxWzdQ=="
+  "resolved" "https://registry.npmjs.org/system/-/system-2.0.1.tgz"
+  "version" "2.0.1"
+
 "tapable@^1.0.0", "tapable@^1.0.0-beta.5", "tapable@^1.1.3":
   "integrity" "sha512-4WK/bYZmj8xLr+HUCODHGF1ZFzsYffasLUgEiMBY4fgtltdO6B4WJtlSbPaDTLpYTcGVwM2qLnFTICEcNxs3kA=="
   "resolved" "https://registry.npmjs.org/tapable/-/tapable-1.1.3.tgz"
@@ -11513,6 +11546,13 @@
     "@istanbuljs/schema" "^0.1.2"
     "glob" "^7.1.4"
     "minimatch" "^3.0.4"
+
+"test@>=0.0.5":
+  "integrity" "sha1-WYasRF7Bd1QyJRLRBLoyyKY+k44="
+  "resolved" "https://registry.npmjs.org/test/-/test-0.6.0.tgz"
+  "version" "0.6.0"
+  dependencies:
+    "ansi-font" "0.0.2"
 
 "text-table@^0.2.0":
   "integrity" "sha1-f17oI66AUgfACvLfSoTsP8+lcLQ="
