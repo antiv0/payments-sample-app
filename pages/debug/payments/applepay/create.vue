@@ -11,7 +11,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-const applepayjs = require('applepayjs');
+// import '@types/applepayjs'
+//import '@types/applepayjs';
 @Component({})
 export default class CreateApplePayVue extends Vue {
     mounted() {
@@ -24,9 +25,9 @@ export default class CreateApplePayVue extends Vue {
     
 
     async makeApiCall() {
-        alert(applepayjs.ApplePaySession.canMakePayments())
-        alert(applepayjs.ApplePaySession.canMakePayments())
-        alert(applepayjs.ApplePaySession.canMakePayments())
+        alert(ApplePaySession.canMakePayments())
+        
+        // alert(applepayjs.ApplePaySession.canMakePayments())
     }
 }
 </script>
