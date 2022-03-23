@@ -3,14 +3,16 @@ import axios from 'axios'
 import express from 'express'
 import { v4 as uuidv4 } from 'uuid'
 import {
-  merchantIdentityCertificate,
-  merchantIdentityKey,
+  partnershipMerchantIdentityCertificate,
+  partnershipMerchantIdentityKey,
+  payfacMerchantIdentityCertificate,
+  payfacMerchantIdentityKey,
+  partnershipMerchantId,
+  payfacMerchantId,
 } from './applePaySettings'
-import { apiHostname } from './serverEnv'
+import { apiHostname, domainName } from './serverEnv'
 
 const app = express()
-const MERCHANT_IDENTIFIER = 'merchant.bigtimetestmerchant.com'
-const DOMAIN_NAME = 'sample-staging.circle.com'
 const DISPLAY_NAME = 'Circle Apple Pay'
 
 // Steps:
@@ -22,38 +24,42 @@ const DISPLAY_NAME = 'Circle Apple Pay'
 app.post('/validate', (req, res) => {
   req.on('data', (data) => {
     // data is in byte array so first transform it to string and then parse it to object, and then take it's property appleUrl
-    const { appleUrl } = JSON.parse(data.toString())
-    console.log(JSON.parse(data.toString()).appleUrl)
+    const { appleUrl, merchantType } = JSON.parse(data.toString())
+    const cert =
+      merchantType === 'PayFac'
+        ? payfacMerchantIdentityCertificate
+        : partnershipMerchantIdentityCertificate // pem apple cert
+    const key =
+      merchantType === 'PayFac'
+        ? payfacMerchantIdentityKey
+        : partnershipMerchantIdentityKey
 
     const httpsAgent = new https.Agent({
       rejectUnauthorized: false,
-      cert: merchantIdentityCertificate, // pem apple cert
-      key: merchantIdentityKey, // key apple
+      cert,
+      key,
     })
+    const requestData = {
+      merchantIdentifier:
+        merchantType === 'PayFac' ? payfacMerchantId : partnershipMerchantId,
+      domainName,
+      displayName: DISPLAY_NAME,
+    }
     axios
-      .post(
-        appleUrl,
-        {
-          merchantIdentifier: MERCHANT_IDENTIFIER,
-          domainName: DOMAIN_NAME,
-          displayName: DISPLAY_NAME,
-        },
-        {
-          httpsAgent,
-        }
-      )
+      .post(appleUrl, requestData, {
+        httpsAgent,
+      })
       .then((a) => {
-        console.log('Successfully validated apple pay session')
         // return the json received from Apple Pay server unmodified
         res.send(a.data)
       })
       .catch((a) => {
-        res.send({ data: null })
-        console.log('Error occured during session validation')
-        console.log(a.message)
-        console.log(a.response.status)
-        console.log(a.response.data)
-        console.log(a.response.headers)
+        res.send({
+          errorMessage: a.message,
+          responseStatus: a.response.status,
+          responseData: a.response.data,
+          responseHeaders: a.response.headers,
+        })
       })
   })
 })
@@ -74,7 +80,7 @@ export interface TokensPayload {
 }
 
 const instance = axios.create({
-  baseURL: 'https://api-staging.circle.com',
+  baseURL: apiHostname,
 })
 
 function sendToken(token: ApplePayJS.ApplePayPaymentToken, apiKey: string) {
@@ -125,7 +131,7 @@ export interface BasePaymentPayload {
 }
 
 function createPaymentPayload(sourceId: string): BasePaymentPayload {
-  const payload: BasePaymentPayload = {
+  return {
     idempotencyKey: uuidv4(),
     amount: {
       amount: '0.5',
@@ -143,7 +149,6 @@ function createPaymentPayload(sourceId: string): BasePaymentPayload {
       ipAddress: '172.33.222.1',
     },
   }
-  return payload
 }
 
 function createPayment(payload: BasePaymentPayload, apiKey: string) {
@@ -172,7 +177,6 @@ app.post('/pay', (req, res) => {
       details: details.token,
     }
 
-    console.log(JSON.stringify(details))
     sendToken(details.token, apiKey)
       .then((response) => {
         createPayment(createPaymentPayload(response.data.id), apiKey)
